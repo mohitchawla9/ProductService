@@ -1,5 +1,7 @@
 package com.productservice.productservice.controllers;
 
+import com.productservice.productservice.dtos.FakeStoreProductDto;
+import com.productservice.productservice.dtos.GenericProductDto;
 import com.productservice.productservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,7 +20,7 @@ public class ProductController {
    }
 
     @GetMapping("/{id}")
-    public String getProductById(@PathVariable("id") Long id) {
+    public GenericProductDto getProductById(@PathVariable("id") Long id) {
         //return "Product fetched with id: " + id;
         return productService.getProductById(id);
     }
