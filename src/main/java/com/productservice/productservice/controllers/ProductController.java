@@ -31,7 +31,9 @@ public class ProductController {
     public List<GenericProductDto> getAllProducts() { return productService.getAllProducts();}
 
     @DeleteMapping("/{id}")
-    public void deleteProductById() { }
+    public GenericProductDto deleteProductById(@PathVariable("id") Long id) {
+       return productService.deleteProductById(id);
+    }
 
     @PostMapping
     public GenericProductDto createProduct(@RequestBody GenericProductDto genericProductDto) {

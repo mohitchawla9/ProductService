@@ -8,7 +8,7 @@ public interface ProductService {
 
     GenericProductDto getProductById(Long id);
     List<GenericProductDto> getAllProducts();
-    void deleteProductById(Long id);
+    GenericProductDto deleteProductById(Long id);
     GenericProductDto createProduct(GenericProductDto genericProductDto);
     void updateProductById();
 }
