@@ -2,17 +2,20 @@ package com.productservice.productservice.services;
 
 import com.productservice.productservice.dtos.FakeStoreProductDto;
 import com.productservice.productservice.dtos.GenericProductDto;
-import com.productservice.productservice.models.Product;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService{
 
     private RestTemplateBuilder restTemplateBuilder;
-    private String getProductUrl = "https://fakestoreapi.com/products/1";
+    private String getProductUrl = "https://fakestoreapi.com/products/{id}";
+    private String getAllProductsUrl = "https://fakestoreapi.com/products";
 
     FakeStoreProductService(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplateBuilder = restTemplateBuilder;
@@ -40,14 +43,24 @@ public class FakeStoreProductService implements ProductService{
         //RestTemplate
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreProductDto> responseEntity =
-                restTemplate.getForEntity(getProductUrl, FakeStoreProductDto.class);
+                restTemplate.getForEntity(getProductUrl, FakeStoreProductDto.class , id);
 
         return convertToGenericProductDto(responseEntity.getBody());
     }
 
     @Override
-    public void getAllProducts() {
+    public List<GenericProductDto> getAllProducts() {
+        RestTemplate restTemplate = restTemplateBuilder.build();
 
+        ResponseEntity<FakeStoreProductDto[]> responseEntity =
+                restTemplate.getForEntity(getAllProductsUrl, FakeStoreProductDto[].class);
+
+        List<GenericProductDto> result = new ArrayList<>();
+        List<FakeStoreProductDto> fakeStoreProductDtos = List.of(responseEntity.getBody());
+        for (FakeStoreProductDto fakeStoreProductDto : fakeStoreProductDtos) {
+            result.add(convertToGenericProductDto(fakeStoreProductDto));
+        }
+        return result;
     }
 
     @Override
