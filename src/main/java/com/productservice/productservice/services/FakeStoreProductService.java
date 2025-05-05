@@ -6,6 +6,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.ResponseExtractor;
@@ -91,7 +92,18 @@ public class FakeStoreProductService implements ProductService{
     }
 
     @Override
-    public void updateProductById() {
+    public GenericProductDto updateProductById(Long id, GenericProductDto updatedProductDto) {
+        RestTemplate restTemplate = restTemplateBuilder.build();
 
+        ResponseEntity<FakeStoreProductDto> responseEntity = restTemplate.exchange(
+                specificProductUrl,
+                HttpMethod.PATCH,
+                new org.springframework.http.HttpEntity<>(updatedProductDto),
+                FakeStoreProductDto.class,
+                id
+        );
+
+        return convertToGenericProductDto(responseEntity.getBody());
     }
+
 }

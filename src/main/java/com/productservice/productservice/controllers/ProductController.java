@@ -39,11 +39,14 @@ public class ProductController {
     public GenericProductDto createProduct(@RequestBody GenericProductDto genericProductDto) {
        return productService.createProduct(genericProductDto);
     }
-    public void updateProductById(){ }
+
+    @PatchMapping("/{id}")
+    public void updateProductById(@RequestBody GenericProductDto genericProductDto, @PathVariable("id") Long id) {
+       productService.updateProductById(id, genericProductDto);
+    }
 }
 
 /*
-
 3 ways of Dependency Injection :-
 
 1. Constructor Injection
