@@ -1,26 +1,41 @@
 package com.productservice.productservice;
 
-import com.productservice.productservice.inheritancerelations.tableperclass.*;
+import com.productservice.productservice.inheritancerelations.singletable.Mentor;
+import com.productservice.productservice.inheritancerelations.singletable.MentorRepository;
+import com.productservice.productservice.inheritancerelations.singletable.Student;
+import com.productservice.productservice.inheritancerelations.singletable.User;
+import com.productservice.productservice.inheritancerelations.singletable.StudentRepository;
+import com.productservice.productservice.inheritancerelations.singletable.UserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.List;
-
 @SpringBootApplication
 public class ProductServiceApplication implements CommandLineRunner {
 
 	private MentorRepository mentorRepository;
-	private StudentRepository studentRepository;
 	private UserRepository userRepository;
+	private StudentRepository studentRepository;
 
-	public ProductServiceApplication(@Qualifier("tpc_mentorrepository") MentorRepository mentorRepository
-	, StudentRepository studentRepository, UserRepository userRepository) {
+	ProductServiceApplication(@Qualifier("st_mentorrepo") MentorRepository mentorRepository,
+							  @Qualifier("st_userrepo") UserRepository userRepository,
+							  @Qualifier("st_studentrepo") StudentRepository studentRepository) {
 		this.mentorRepository = mentorRepository;
-		this.studentRepository = studentRepository;
 		this.userRepository = userRepository;
+		this.studentRepository = studentRepository;
 	}
+
+//	private MentorRepository mentorRepository;
+//	private StudentRepository studentRepository;
+//	private UserRepository userRepository;
+//
+//	public ProductServiceApplication(@Qualifier("tpc_mentorrepository") MentorRepository mentorRepository
+//	, StudentRepository studentRepository, UserRepository userRepository) {
+//		this.mentorRepository = mentorRepository;
+//		this.studentRepository = studentRepository;
+//		this.userRepository = userRepository;
+//	}
 
 	public static void main(String[] args) {SpringApplication.run(ProductServiceApplication.class, args);
 	}
@@ -51,6 +66,25 @@ public class ProductServiceApplication implements CommandLineRunner {
 //		for (User user1 : users) {
 //			System.out.println(user1.toString());
 //		}
+
+		User user = new User();
+		user.setName("Arshi");
+		user.setEmail("arshi@gmail.com");
+		userRepository.save(user);
+
+		Mentor mentor = new Mentor();
+		mentor.setName("Deepak");
+		mentor.setEmail("deepak@gmail.com");
+		mentor.setAvgRating(4.7);
+		mentorRepository.save(mentor);
+
+		Student student = new Student();
+		student.setName("harsh");
+		student.setEmail("harsh@gmail.com");
+		student.setPsp(99.8);
+		studentRepository.save(student);
+
+
 	}
 
 }
