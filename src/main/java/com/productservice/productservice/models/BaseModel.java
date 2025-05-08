@@ -18,3 +18,4 @@ public class BaseModel {
     @Column(name = "id", columnDefinition = "binary(16)",nullable = false, updatable = false)
     private UUID id;
 }
+
