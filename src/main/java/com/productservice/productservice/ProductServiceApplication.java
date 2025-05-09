@@ -155,8 +155,8 @@ public class ProductServiceApplication implements CommandLineRunner {
 //		product.setPrice(savedPrice);
 //		product.setCategory(savedCategory);
 //		product.setDescription("Best iphone ever");
-//
-//		Product savedProduct = productRepository.save(product);
+
+		//Product savedProduct = productRepository.save(product);
 
 //		Optional<Price> optionalPrice = priceRepository.findById(UUID.fromString("5c234d44-7a5d-4cdc-96f2-96a62ceb3e3f"));
 //
@@ -165,7 +165,9 @@ public class ProductServiceApplication implements CommandLineRunner {
 //		}
 
 
-		priceRepository.deleteById(UUID.fromString("5c234d44-7a5d-4cdc-96f2-96a62ceb3e3f"));
+//		priceRepository.deleteById(UUID.fromString("5c234d44-7a5d-4cdc-96f2-96a62ceb3e3f"));
+
+		productRepository.deleteById(UUID.fromString("f80a6fa7-d6e1-47b7-be78-f260fc06150e"));
 
 	}
 
