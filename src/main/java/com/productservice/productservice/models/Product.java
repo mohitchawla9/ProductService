@@ -23,4 +23,6 @@ public class Product extends BaseModel {
     //Category isn't primitive attribute,it is a relation
     @ManyToOne(optional = false)
     private Category category;
+
+    private int inventoryCount ;
 }
