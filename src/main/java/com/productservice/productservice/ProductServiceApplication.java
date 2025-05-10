@@ -20,6 +20,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -245,7 +246,23 @@ public class ProductServiceApplication implements CommandLineRunner {
 //			System.out.println(product.toString());
 //		}
 
+//		List<Product> products = productRepository.findAllByTitle("iphone 15 pro max");
 
+//		Product product = new Product();
+//		List<Product> products = productRepository.findByPrice_ValueGreaterThan(50000);
+
+//		Category category = new Category();
+//        category.setName("Samsung");
+//        Category category1 = categoryRepository.save(category);
+//
+//        Price price = new Price();
+//        price.setValue(49000);
+//        price.setCurrency("INR");
+//
+//        Product product = new Product("Samsung Fold 5", "Samsung's Foldable phone", price,"XYZ",
+//                category1);
+//
+//        productRepository.save(product);
 
 	}
 
