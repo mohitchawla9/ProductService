@@ -6,6 +6,8 @@ import com.productservice.productservice.services.ProductService;
 import com.productservice.productservice.thirdPartyClients.fakeStoreClient.FakeStoreClient;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -31,6 +34,9 @@ public class ProductControllerTest {
 
     @MockBean
     private ProductService productService;
+
+    @Captor
+    private ArgumentCaptor<Long> argumentCaptor;
 
     @Test
     @DisplayName("Testing 1 + 1 is 2")
@@ -79,5 +85,23 @@ public class ProductControllerTest {
 
 //        assertEquals(genericProductDto,productController.getProductById(10L));
     }
+
+    @Test
+    @DisplayName("testProductControllerCallsProductServiceWithSameProductIdAsInput")
+    void testIfSameInput() throws ProductNotFoundException {
+        //This is the test case to check if productController is passing the same productId to the
+        //productService as the input.
+        Long id = 100L;
+
+        when(productService.getProductById(id)).thenReturn(new GenericProductDto());
+
+        GenericProductDto genericProductDto =  productController.getProductById(id);
+
+        verify(productService).getProductById(argumentCaptor.capture());
+
+        assertEquals(id, argumentCaptor.getValue());
+    }
+
+
 
 }
