@@ -3,7 +3,10 @@ package com.productservice.productservice.controllers;
 import com.productservice.productservice.dtos.GenericProductDto;
 import com.productservice.productservice.exceptions.ProductNotFoundException;
 import com.productservice.productservice.services.ProductService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
+//import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,11 +24,14 @@ public class  ProductController {
       this.productService = productService;
    }
 
+    //localhost:8080/products/12345
     @GetMapping("/{id}")
-    public GenericProductDto getProductById(@PathVariable("id") Long id) throws ProductNotFoundException {
-        //return "Product fetched with id: " + id;
-        return productService.getProductById(id);
+    public GenericProductDto getProductById(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authToken, @PathVariable("id") Long id) throws ProductNotFoundException {
+        GenericProductDto genericProductDto = productService.getProductById(authToken, id);
+//        GenericProductDto genericProductDto1 = new GenericProductDto();
+        return genericProductDto;
     }
+
 
     @GetMapping("")
     public List<GenericProductDto> getAllProducts() { return productService.getAllProducts();}
