@@ -86,6 +86,51 @@ public class ProductServiceApplication implements CommandLineRunner {
 //	@Transactional
 	public void run(String... args) throws Exception {
 
+//		Category category = new Category();
+//		category.setName("Apple Devices");
+//
+//		Category savedCategory =  categoryRepository.save(category);
+//
+////		Optional<Category> optionalCategory = categoryRepository.findById(UUID.fromString("c04a219c-ef08-4347-9c5a-9fc1e4815994"));
+////
+////		if(optionalCategory.isEmpty()) {
+////			throw new RuntimeException("Category was null");
+////		}
+//
+//		//Category category1 = optionalCategory.get();
+//
+//		Product product = new Product();
+//		product.setTitle("iphone 15 pro");
+//		product.setCategory(savedCategory);
+//		product.setDescription("Best iphone ever");
+//
+//		Product savedProduct = productRepository.save(product);
+//
+//		Price price = new Price();
+//		price.setCurrency("INR");
+//		price.setValue(100000);
+//
+////		Price savedPrice = priceRepository.save(price);
+//
+//		Category category2 = new Category();
+//		category.setName("Apple Devices");
+//
+//		Category savedCategoy =  categoryRepository.save(category2);
+//
+//		Product product1 = new Product();
+//		product1.setTitle("iphone 15 pro");
+//		product1.setCategory(savedCategoy);
+//		product1.setDescription("Best iphone ever");
+//		product1.setPrice(price);
+//
+//		Product savedProduct1 = productRepository.save(product);
+
+//		Find all products with category = Apple Devices
+//		List<Product> products = category.getProducts();
+//		for(Product product : products) {
+//			System.out.println(product.getTitle());
+//		}
+
 //		Mentor mentor = new Mentor();
 //		mentor.setName("Deepak");
 //		mentor.setEmail("deepak.kasera@scaler.com");
