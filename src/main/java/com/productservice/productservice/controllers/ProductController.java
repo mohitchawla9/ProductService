@@ -6,6 +6,7 @@ import com.productservice.productservice.services.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 //import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,13 +17,15 @@ import java.util.List;
 public class  ProductController {
 
     //@Autowired
-    private ProductService productService;
+    private final ProductService productService;
+    private final RedisTemplate<String, String> redisTemplate;
 
     //Constructor Injection
     //@Qualifier("fakeStoreProductService")
-    ProductController( ProductService productService) {
+    ProductController(ProductService productService, RedisTemplate<String, String> redisTemplate) {
       this.productService = productService;
-   }
+        this.redisTemplate = redisTemplate;
+    }
 
     //localhost:8080/products/12345
     @GetMapping("/{id}")
